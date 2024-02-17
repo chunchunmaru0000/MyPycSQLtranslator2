@@ -1,0 +1,105 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>MyPycSql2</name>
+    </assembly>
+    <members>
+        <member name="T:MyPycSQLtranslator2.PycSQLtranslator2">
+            <summary>
+            Represents a C# class for translating queries from a custom Cyrillic-based SQL-like interpreted-like language to English.
+            </summary>
+        </member>
+        <member name="F:MyPycSQLtranslator2.PycSQLtranslator2.TokenLenght">
+            <summary>
+            Represents the max lenght of line of words that can be a embedded token
+            </summary>
+        </member>
+        <member name="T:MyPycSQLtranslator2.PycSQLtranslator2.Token">
+            <summary>
+            Represents a token with its word and type.
+            </summary>
+        </member>
+        <member name="P:MyPycSQLtranslator2.PycSQLtranslator2.Token.Word">
+            <summary>
+            The word contained in the token.
+            </summary>
+        </member>
+        <member name="P:MyPycSQLtranslator2.PycSQLtranslator2.Token.Type">
+            <summary>
+            The type of the token.
+            </summary>
+        </member>
+        <member name="F:MyPycSQLtranslator2.PycSQLtranslator2.PycSQLdictionary">
+            <summary>
+            Dictionary for mapping Cyrillic keywords to their English equivalents.
+            </summary>
+        </member>
+        <member name="F:MyPycSQLtranslator2.PycSQLtranslator2.WordsLens">
+            <summary>
+            Dictionary that is consists of tokens and max lenght of embeddings that thay can be in
+            </summary>
+        </member>
+        <member name="F:MyPycSQLtranslator2.PycSQLtranslator2.EmbeddedPycDict2">
+            <summary>
+            Two words embeddings
+            </summary>
+        </member>
+        <member name="F:MyPycSQLtranslator2.PycSQLtranslator2.EmbeddedPycDict3">
+            <summary>
+            Three words embedding
+            </summary>
+        </member>
+        <member name="F:MyPycSQLtranslator2.PycSQLtranslator2.EmbeddedPycDict4">
+            <summary>
+            Four words embedding
+            </summary>
+        </member>
+        <member name="F:MyPycSQLtranslator2.PycSQLtranslator2.EmbeddedPycDictMain">
+            <summary>
+            All embedded dictionares in array
+            </summary>
+        </member>
+        <member name="M:MyPycSQLtranslator2.PycSQLtranslator2.Translate(System.String)">
+            <summary>
+            Translates the input query from the custom Cyrillic-based language to English.
+            </summary>
+            <param name="query">The query to be translated.</param>
+            <returns>The translated query in English.</returns>
+        </member>
+        <member name="M:MyPycSQLtranslator2.PycSQLtranslator2.Cyrillic(System.Char)">
+            <summary>
+            Determines if a character is Cyrillic.
+            </summary>
+        </member>
+        <member name="M:MyPycSQLtranslator2.PycSQLtranslator2.Quotic(System.Char)">
+            <summary>
+            Determines if a character is quotic
+            </summary>
+        </member>
+        <member name="M:MyPycSQLtranslator2.PycSQLtranslator2.Anotheric(System.Char)">
+            <summary>
+            Determines if a character is $ or _ or [0-9]
+            </summary>
+        </member>
+        <member name="M:MyPycSQLtranslator2.PycSQLtranslator2.Valid(System.Char)">
+            <summary>
+            Determines if a character is valid
+            </summary>
+        </member>
+        <member name="M:MyPycSQLtranslator2.PycSQLtranslator2.Tokenize(System.String)">
+            <summary>
+            Tokenizes the input query into individual words based on the presence of Cyrillic characters.
+            </summary>
+        </member>
+        <member name="M:MyPycSQLtranslator2.PycSQLtranslator2.Dictionarize(System.Collections.Generic.List{MyPycSQLtranslator2.PycSQLtranslator2.Token}@)">
+            <summary>
+            Applies translation logic based on the token types and performs the query translation.
+            </summary>
+        </member>
+        <member name="M:MyPycSQLtranslator2.PycSQLtranslator2.TokenUp(System.Collections.Generic.List{MyPycSQLtranslator2.PycSQLtranslator2.Token}@)">
+            <summary>
+            Applies translation logic based on the token types and embeddings and performs the query translation.
+            </summary>
+        </member>
+    </members>
+</doc>
