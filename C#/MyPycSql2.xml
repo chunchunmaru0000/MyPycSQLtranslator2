@@ -64,7 +64,9 @@
             Translates the input query from the custom Cyrillic-based language to English.
             </summary>
             <param name="query">The query to be translated.</param>
-            <returns>The translated query in English.</returns>
+            <returns>The translated query in English 
+            ALSO RETURNED STRING WILL BE TRIMMED OF SPACES IN START OF STRING AND LOWERED
+            </returns>
         </member>
         <member name="M:MyPycSQLtranslator2.PycSQLtranslator2.Cyrillic(System.Char)">
             <summary>
@@ -89,11 +91,6 @@
         <member name="M:MyPycSQLtranslator2.PycSQLtranslator2.Tokenize(System.String)">
             <summary>
             Tokenizes the input query into individual words based on the presence of Cyrillic characters.
-            </summary>
-        </member>
-        <member name="M:MyPycSQLtranslator2.PycSQLtranslator2.Dictionarize(System.Collections.Generic.List{MyPycSQLtranslator2.PycSQLtranslator2.Token}@)">
-            <summary>
-            Applies translation logic based on the token types and performs the query translation.
             </summary>
         </member>
         <member name="M:MyPycSQLtranslator2.PycSQLtranslator2.TokenUp(System.Collections.Generic.List{MyPycSQLtranslator2.PycSQLtranslator2.Token}@)">

@@ -259,6 +259,8 @@ namespace MyPycSQLtranslator2
         /// </summary>
         public static Dictionary<string, int> WordsLens = new Dictionary<string, int>()
         {
+            { "выбрать", 2 },
+            { "из", 2 },
             { "добавить", 3 }
         };
 
@@ -267,7 +269,9 @@ namespace MyPycSQLtranslator2
         /// </summary>
         public static Dictionary<string, string> EmbeddedPycDict2 = new Dictionary<string, string>()
         {
-            { "добавить в", "insert into" }
+            { "добавить в", "insert into" },
+            { "выбрать все", "select *"},
+            { "из таблицы", "from" }
         };
 
         /// <summary>
@@ -301,18 +305,20 @@ namespace MyPycSQLtranslator2
         /// Translates the input query from the custom Cyrillic-based language to English.
         /// </summary>
         /// <param name="query">The query to be translated.</param>
-        /// <returns>The translated query in English.</returns>
+        /// <returns>The translated query in English 
+        /// ALSO RETURNED STRING WILL BE TRIMMED OF SPACES IN START OF STRING AND LOWERED
+        /// </returns>
         public static string Translate(string query)
         {
-            query = query.ToLower();
+            query = query.ToLower().Replace('ё', 'е').TrimStart();
             var tokens = Tokenize(query);
-            return string.Join(" ", TokenUp(ref tokens));
+            return string.Join("", TokenUp(ref tokens));
         }
 
         /// <summary>
         /// Determines if a character is Cyrillic.
         /// </summary>
-        public static bool Cyrillic(char c) { return c > 1039 && c < 1104; }
+        public static bool Cyrillic(char c) { return c > 1039 && c < 1104 || c == 1105; }
 
         /// <summary>
         /// Determines if a character is quotic
@@ -322,7 +328,7 @@ namespace MyPycSQLtranslator2
         /// <summary>
         /// Determines if a character is $ or _ or [0-9]
         /// </summary>
-        public static bool Anotheric(char c) { return c == '$' || c == '_' || char.IsDigit(c); }
+        public static bool Anotheric(char c) { return c == '$' || c == '_' || c == '@' || char.IsDigit(c); }
 
         /// <summary>
         /// Determines if a character is valid
@@ -332,7 +338,7 @@ namespace MyPycSQLtranslator2
         /// <summary>
         /// Tokenizes the input query into individual words based on the presence of Cyrillic characters.
         /// </summary>
-        private static List<Token> Tokenize(string query)
+        public static List<Token> Tokenize(string query)
         {
             query += " ";
             string word = "" + query[0];
@@ -345,14 +351,14 @@ namespace MyPycSQLtranslator2
 
             for (int i = 1; i < query.Length - 1; i++)
             {
-                if (Valid(query[i]) && !Quotic(query[i]) && wordProceedOther && !quotedProceed)
+                if (Valid(query[i]) && query[i] != ' ' && wordProceedOther && !Quotic(query[i]) && !quotedProceed)
                 {
                     tokens.Add(new Token() { Word = word, Type = "OTHER" });
                     word = "" + query[i];
                     wordProceedOther = false;
                     wordProceedPyc = true;
                 }
-                else if (!Valid(query[i]) && !Quotic(query[i]) && wordProceedPyc && !quotedProceed)
+                else if (!Valid(query[i]) && query[i] != ' ' && wordProceedPyc && !Quotic(query[i]) && !quotedProceed)
                 {
                     tokens.Add(new Token() { Word = word, Type = "PYC" });
                     word = "" + query[i];
@@ -363,9 +369,8 @@ namespace MyPycSQLtranslator2
                 {
                     if (quoted)
                     {
-                        word += query[i];
+                        word += query[i++];
                         tokens.Add(new Token() { Word = word, Type = "QUOTED" });
-                        i++;
                         word = "" + query[i];
                         quotedProceed = false;
                     }
@@ -377,33 +382,26 @@ namespace MyPycSQLtranslator2
                     }
                     quoted = !quoted;
                 }
+                else if (query[i] == ' ')
+                { 
+                    tokens.Add(new Token() { Word = word, Type = wordProceedPyc ? "PYC" : wordProceedOther ? "OTHER" : "QUOTED" });
+                    word = " ";
+
+                    while (query[++i] == ' ' && i < query.Length - 1)
+                        word += ' ';
+                    tokens.Add(new Token() { Word = word, Type = "SPACE" });
+
+                    word = "" + query[i];
+                    wordProceedPyc = Cyrillic(query[i]);
+                    wordProceedOther = !wordProceedPyc;
+                    quoted = Quotic(query[i]);
+                }
                 else
                     word += query[i];
             }
             if (!string.IsNullOrEmpty(word))
                 tokens.Add(new Token() { Word = word, Type = wordProceedPyc ? "PYC" : wordProceedOther ? "OTHER" : "QUOTED" });
             return tokens;
-        }
-
-        /// <summary>
-        /// Applies translation logic based on the token types and performs the query translation.
-        /// </summary>
-        private static List<string> Dictionarize(ref List<Token> tokens)
-        {
-            var words = new List<string>();
-            foreach (Token token in tokens)
-            {
-                if (token.Type == "PYC")
-                {
-                    if (PycSQLdictionary.ContainsKey(token.Word))
-                        words.Add(PycSQLdictionary[token.Word]);
-                    else
-                        words.Add(token.Word);
-                }
-                else
-                    words.Add(token.Word);
-            }
-            return words;
         }
 
         /// <summary>
