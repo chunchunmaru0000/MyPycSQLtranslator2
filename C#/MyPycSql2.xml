@@ -54,6 +54,11 @@
             Four words embedding
             </summary>
         </member>
+        <member name="F:MyPycSQLtranslator2.PycSQLtranslator2.EmbeddedPycDict5">
+            <summary>
+            Five words embedding
+            </summary>
+        </member>
         <member name="F:MyPycSQLtranslator2.PycSQLtranslator2.EmbeddedPycDictMain">
             <summary>
             All embedded dictionares in array
@@ -85,7 +90,7 @@
         </member>
         <member name="M:MyPycSQLtranslator2.PycSQLtranslator2.Valid(System.Char)">
             <summary>
-            Determines if a character is valid
+            Determines if a character is a valid char for names
             </summary>
         </member>
         <member name="M:MyPycSQLtranslator2.PycSQLtranslator2.Tokenize(System.String)">

@@ -108,7 +108,7 @@ namespace MyPycSQLtranslator2
             { "уникальный", "unique" }, { "уник", "unique" },
             { "авто", "auto_increment" }, { "автоувеличение", "auto_increment" },
             { "индекс", "index" },
-            { "отсылаетсяна", "references" }, { "отсыл", "references" }, { "отсылканаДжоДжо", "references" },
+            { "отсылаетсяна", "references" }, { "отсыл", "references" }, { "отсылканаДжоДжо", "references" }, { "ссылаетсяна", "references" }, { "ссылается", "references" }, { "ссыл", "references" },
             { "сегодня", "current_date" },
             { "дата", "date" }, { "дату", "date" },
             { "датавремя", "datetime" },
@@ -153,7 +153,7 @@ namespace MyPycSQLtranslator2
             { "иначеесли", "elseif" }, { "элиф", "elseif" },
             { "асции", "ASCII" },
             { "чардлина", "char_lenght" },
-            { "сверни", "concat" }, { "спернуть", "concat" }, { "заверни", "concat" }, { "завернуть", "concat" },
+            { "сверни", "concat" }, { "свернуть", "concat" }, { "заверни", "concat" }, { "завернуть", "concat" },
             { "поле", "field" },
             { "свнернсеп", "concat_ws" },
             { "найтивсете", "find_in_set" },
@@ -259,9 +259,60 @@ namespace MyPycSQLtranslator2
         /// </summary>
         public static Dictionary<string, int> WordsLens = new Dictionary<string, int>()
         {
+            { "создать", 5 },
+            
+            { "добавить", 3 },
+            { "добавь", 3 },
+            { "свернуть", 3 },
+            { "время", 3 },
+            { "местная", 3 },
+            { "время", 3 },
+            { "секунды", 3 },
+            { "строку", 3 },
+            { "конвертировать", 3 },
+
+            { "база", 2 },
+            { "базу", 2 },
+            { "базы", 2 },
+
             { "выбрать", 2 },
+            { "выбери", 2 },
             { "из", 2 },
-            { "добавить", 3 }
+            { "первичный", 2 },
+            { "внешний", 2 },
+            { "авто", 2 },
+            { "отсылается", 2 },
+            { "ссылается", 2 },
+            { "текущая", 2 },
+            { "если", 2 },
+            { "средний", 2 },
+            { "длинный", 2 },
+            { "маленький", 2 },
+            { "большой", 2 },
+            { "чар", 2 },
+            { "длина", 2 },
+            { "индекс", 2 },
+            { "разность", 2 },
+            { "дата", 2 },
+            { "день", 2 },
+            { "формат", 2 },
+            { "последний", 2 },
+            { "местное", 2 },
+            { "местный", 2 },
+            { "сделать", 2 },
+            { "имя", 2 },
+            { "в", 2 },
+            { "системная", 2 },
+            { "системное", 2 },
+            { "неделя", 2 },
+            { "год", 2 },
+            { "системный", 2 },
+            { "текущий", 2 },
+            { "сессионный", 2 },
+            { "является", 2 },
+            { "айди", 2 },
+            { "номер", 2 },
+            { "", 2 },
         };
 
         /// <summary>
@@ -269,9 +320,98 @@ namespace MyPycSQLtranslator2
         /// </summary>
         public static Dictionary<string, string> EmbeddedPycDict2 = new Dictionary<string, string>()
         {
+            { "из таблицы", "from" },
+            { "из дней", "from_days" },
+            { "текущая дата", "current_date" },
+
+            { "средний текст", "mediumtext" },
+            { "длинный текст", "longtext" },
+
+            { "маленькое число", "smallint" },
+            { "маленький инт", "smallint" },
+
+            { "большое число", "bigint" },
+            { "большой инт", "bigint" },
+
             { "добавить в", "insert into" },
+            { "добавь в", "insert into" },
+
+            { "добавь дату", "adddate" },
+            { "добавь время", "addtime" },
+            { "добавь период", "period_add" },
+
+            { "добавить дату", "adddate" },
+            { "добавить время", "addtime" },
+            { "добавить период", "period_add" },
+
+            { "разность периода", "period_diff" },
+            { "разность периодов", "period_diff" },
+            { "разность период", "period_diff" },
+
             { "выбрать все", "select *"},
-            { "из таблицы", "from" }
+            { "выбери все", "select *"},
+
+            { "первичный ключ", "primary key" },
+            { "вторичный ключ", "foreign key" },
+
+            { "авто инкремент", "auto_increment" },
+            { "авто увеличение", "auto_increment" },
+            { "авто увелич", "auto_increment" },
+
+            { "отсылаетсяна на ", "references" },
+            { "ссылаетсяна на ", "references" },
+
+            { "база данных", "database" },
+            { "базу данных", "database" },
+            { "базы данных", "database" },
+
+            { "если ноль", "ifnull" },
+            { "если нуль", "ifnull" },
+            { "если зеро", "ifnull" },
+            { "если нулл", "ifnull" },
+            { "если нул", "ifnull" },
+            { "является ноль", "isnull" },
+            { "является нуль", "isnull" },
+
+            { "чар длина", "char_lenght" },
+            { "длина чара", "char_lenght" },
+            { "длина строки", "char_lenght" },
+
+            { "индекс подстроки", "substring_intdex" },
+            { "индекс субстроки", "substring_intdex" },
+
+            { "день недели", "dayofweek" },
+            { "день месяца", "dayofmonth" },
+
+            { "дата формат", "date_format" },
+            { "формат даты", "date_format" },
+            { "дата разность", "datediff" },
+            { "разность даты", "datediff" },
+            { "разность времени", "timedeff" },
+            { "время разность", "timedeff" },
+
+            { "последний день", "last_day" },
+            { "местное время", "localtime" },
+            { "местный таймштамп", "localtimestamp" },
+
+            { "сделать время", "maketime" },
+            { "сделать дату", "makedate" },
+
+            { "имя месяца", "monthname" },
+            { "имя дня", "dayname" },
+            { "в дни", "to_days" },
+            { "системная дата", "sysdate" },
+            { "системное время", "systime" },
+            { "неделя год", "weekofyear" },
+            { "год неделя", "yearweek" },
+            
+            { "системный пользователь", "system_user" },
+            { "сессионный пользователь", "session_user" },
+            { "текущий пользователь", "current_user" },
+
+            { "номер соединения", "connection_id" },
+            { "айди соединения", "connection_id" },
+            { "", "" },
         };
 
         /// <summary>
@@ -279,7 +419,19 @@ namespace MyPycSQLtranslator2
         /// </summary>
         public static Dictionary<string, string> EmbeddedPycDict3 = new Dictionary<string, string>()
         {
-            { "добавить в таблицу", "insert into" }
+            { "добавить в таблицу", "insert into" },
+            { "добавь в таблицу", "insert into" },
+
+            { "время в секундах", "time_to_sec" },
+            { "секунды в дату", "sec_to_date" },
+            { "строку в дату", "str_to_date" },
+
+            { "свернуть с разделителем", "concat_ws" },
+
+            { "местная ометка времени", "localtimestamp" },
+            { "местная временная ометка", "localtimestamp" },
+            { "конвертировать в дату", "cast" },
+            { "", "" },
         };
 
         /// <summary>
@@ -287,6 +439,16 @@ namespace MyPycSQLtranslator2
         /// </summary>
         public static Dictionary<string, string> EmbeddedPycDict4 = new Dictionary<string, string>()
         {
+            { "создать таблицу с названием", "create table" },
+            { "", "" }
+        };
+
+        /// <summary>
+        /// Five words embedding
+        /// </summary>
+        public static Dictionary<string, string> EmbeddedPycDict5 = new Dictionary<string, string>()
+        {
+            { "создать базу данных с названием", "create database" },
             { "", "" }
         };
 
@@ -299,6 +461,7 @@ namespace MyPycSQLtranslator2
             EmbeddedPycDict2,
             EmbeddedPycDict3,
             EmbeddedPycDict4,
+            EmbeddedPycDict5,
         };
 
         /// <summary>
@@ -331,7 +494,7 @@ namespace MyPycSQLtranslator2
         public static bool Anotheric(char c) { return c == '$' || c == '_' || c == '@' || char.IsDigit(c); }
 
         /// <summary>
-        /// Determines if a character is valid
+        /// Determines if a character is a valid char for names
         /// </summary>
         public static bool Valid(char c) { return Anotheric(c) || Cyrillic(c); }
 
@@ -410,25 +573,30 @@ namespace MyPycSQLtranslator2
         private static List<string> TokenUp(ref List<Token> tokens)
         {
             var words = new List<string>();
-            for (int i = 0; i < tokens.Count(); i++)
+            for (int i = 0; i < tokens.Count; i++)
             {
                 if (tokens[i].Type == "PYC")
                 {
                     if (WordsLens.ContainsKey(tokens[i].Word)) {
+
                         string embedded = tokens[i].Word;
+                        string safeWord = embedded;
                         int lenght = 0;
+
                         for (int len = 1; len < WordsLens[tokens[i].Word]; len++)
                         {
-                            string word = embedded + " " + tokens[i + len * 2].Word;
-                            if (EmbeddedPycDictMain[len].ContainsKey(word))
-                            {
+                            if (i + len * 2 < tokens.Count)
                                 embedded += " " + tokens[i + len * 2].Word;
+                            else 
+                                break;
+                            
+                            if (EmbeddedPycDictMain[len].ContainsKey(embedded))
+                            {
+                                safeWord = embedded;
                                 lenght = len;
                             }
-                            else
-                                break;
                         }
-                        words.Add(EmbeddedPycDictMain[lenght][embedded]);
+                        words.Add(EmbeddedPycDictMain[lenght][safeWord]);
                         i += lenght * 2;
                     }
                     else
