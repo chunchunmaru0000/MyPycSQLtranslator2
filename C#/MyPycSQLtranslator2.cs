@@ -266,7 +266,6 @@ namespace MyPycSQLtranslator2
             { "свернуть", 3 },
             { "время", 3 },
             { "местная", 3 },
-            { "время", 3 },
             { "секунды", 3 },
             { "строку", 3 },
             { "конвертировать", 3 },
@@ -350,6 +349,8 @@ namespace MyPycSQLtranslator2
 
             { "выбрать все", "select *"},
             { "выбери все", "select *"},
+            { "выбрать всё", "select *"},
+            { "выбери всё", "select *"},
 
             { "первичный ключ", "primary key" },
             { "вторичный ключ", "foreign key" },
@@ -473,7 +474,7 @@ namespace MyPycSQLtranslator2
         /// </returns>
         public static string Translate(string query)
         {
-            query = query.ToLower().Replace('ё', 'е').TrimStart();
+            query = query.ToLower().TrimStart();
             var tokens = Tokenize(query);
             return string.Join("", TokenUp(ref tokens));
         }
@@ -570,7 +571,7 @@ namespace MyPycSQLtranslator2
         /// <summary>
         /// Applies translation logic based on the token types and embeddings and performs the query translation.
         /// </summary>
-        private static List<string> TokenUp(ref List<Token> tokens)
+        public static List<string> TokenUp(ref List<Token> tokens)
         {
             var words = new List<string>();
             for (int i = 0; i < tokens.Count; i++)
